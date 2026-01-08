@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hitung Gaji</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<table class="gaji-box">
+<tr>
+    <th>INPUT</th>
+    <th>OUTPUT</th>
+</tr>
+<tr>
+<td>
+    <label>Gaji Pokok:</label><br>
+    <input type="number" id="gaji"><br><br>
+
+    <label>Jam Lembur:</label><br>
+    <input type="number" id="lembur"><br><br>
+
+    <button onclick="hitung()">Hitung</button>
+</td>
+
+<td>
+    <p>Gaji Pokok: <span id="gp">-</span></p>
+    <p>Lembur: <span id="gl">-</span></p>
+    <p>Gaji Kotor: <span id="gk">-</span></p>
+    <p>Pajak: <span id="pj">-</span></p>
+    <p><b>Gaji Bersih: <span id="gb">-</span></b></p>
+</td>
+</tr>
+</table>
+
+<script>
+function hitung() {
+    let gp = parseInt(document.getElementById("gaji").value);
+    let jam = parseInt(document.getElementById("lembur").value);
+
+    let lembur = jam * 20000;
+    let kotor = gp + lembur;
+
+    let pajak = kotor < 5000000 ? kotor * 0.05 :
+                kotor <= 10000000 ? kotor * 0.1 :
+                kotor * 0.15;
+
+    document.getElementById("gp").innerHTML = "Rp " + gp.toLocaleString();
+    document.getElementById("gl").innerHTML = "Rp " + lembur.toLocaleString();
+    document.getElementById("gk").innerHTML = "Rp " + kotor.toLocaleString();
+    document.getElementById("pj").innerHTML = "Rp " + pajak.toLocaleString();
+    document.getElementById("gb").innerHTML = "Rp " + (kotor - pajak).toLocaleString();
+}
+</script>
+
+</body>
+</html>
